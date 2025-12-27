@@ -1,8 +1,18 @@
 @import "tailwindcss";
 
 :root {
+  /* Light Theme (Preserved but overridden by dark preference for this app mostly) */
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Royal Palette */
+  --royal-gold: #D4AF37;
+  --royal-gold-hover: #B4942E;
+  --dark-950: #0a0a0a;
+  --dark-900: #171717;
+  --dark-800: #262626;
+  --dark-700: #404040;
+  --text-muted: #a3a3a3;
 }
 
 @theme inline {
@@ -10,6 +20,14 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  --color-royal-gold: var(--royal-gold);
+  --color-royal-gold-hover: var(--royal-gold-hover);
+  --color-dark-950: var(--dark-950);
+  --color-dark-900: var(--dark-900);
+  --color-dark-800: var(--dark-800);
+  --color-dark-700: var(--dark-700);
+  --color-text-muted: var(--text-muted);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +40,23 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  @apply bg-dark-950 text-white min-h-screen selection:bg-royal-gold selection:text-black;
+}
+
+/* Luxury Utilities */
+.glass-panel {
+  @apply bg-dark-900/50 backdrop-blur-md border border-white/10;
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+}
+
+.text-gold {
+  color: var(--royal-gold);
+}
+
+.border-gold {
+  border-color: var(--royal-gold);
 }
