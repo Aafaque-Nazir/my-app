@@ -16,7 +16,10 @@ export default function PublicNavbar() {
     ];
 
     return (
-        <nav className="fixed w-full z-50 bg-dark-950/90 backdrop-blur-md border-b border-white/5">
+        <nav className="fixed w-full z-50 bg-black/20 backdrop-blur-xl border-b border-white/5 transition-all duration-300">
+            {/* Gradient Border Line */}
+            <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-50" />
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0 flex items-center">

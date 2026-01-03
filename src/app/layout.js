@@ -1,5 +1,6 @@
-import { Outfit, Inter } from "next/font/google"; // Luxury fonts
+import { Outfit, Cinzel } from "next/font/google"; // Luxury fonts
 import { AppProvider } from "@/context/AppContext";
+import NextAuthSessionProvider from "@/components/NextAuthSessionProvider";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -7,8 +8,8 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
   subsets: ["latin"],
 });
 
@@ -22,11 +23,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${outfit.variable} ${inter.variable} antialiased bg-dark-950 text-white`}
+        className={`${outfit.variable} ${cinzel.variable} antialiased bg-dark-950 text-white`}
       >
-        <AppProvider>
-          {children}
-        </AppProvider>
+        <NextAuthSessionProvider>
+          <AppProvider>
+            {children}
+          </AppProvider>
+        </NextAuthSessionProvider>
       </body>
     </html>
   );

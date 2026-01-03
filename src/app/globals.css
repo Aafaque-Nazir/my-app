@@ -1,62 +1,109 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import 'tailwindcss';
 
 :root {
-  /* Light Theme (Preserved but overridden by dark preference for this app mostly) */
-  --background: #ffffff;
-  --foreground: #171717;
-  
-  /* Royal Palette */
+  /* Royal Palette - Enhanced */
   --royal-gold: #D4AF37;
-  --royal-gold-hover: #B4942E;
-  --dark-950: #0a0a0a;
-  --dark-900: #171717;
-  --dark-800: #262626;
-  --dark-700: #404040;
-  --text-muted: #a3a3a3;
-}
+  --royal-gold-light: #F4D03F;
+  --royal-gold-dark: #AA8C2C;
+  --text-primary: #EDEDED;
+  --text-secondary: #A3A3A3;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  
+  --dark-950: #050505;
+  --dark-900: #0a0a0a;
+  --dark-800: #121212;
+  --dark-700: #1e1e1e;
+
+  /* Tailwind 4 Auto-Mappings */
   --color-royal-gold: var(--royal-gold);
-  --color-royal-gold-hover: var(--royal-gold-hover);
+  --color-royal-gold-light: var(--royal-gold-light);
+  --color-royal-gold-dark: var(--royal-gold-dark);
+  --color-background: var(--dark-950);
+  --color-foreground: var(--text-primary);
   --color-dark-950: var(--dark-950);
   --color-dark-900: var(--dark-900);
   --color-dark-800: var(--dark-800);
   --color-dark-700: var(--dark-700);
-  --color-text-muted: var(--text-muted);
+  --color-text-muted: var(--text-secondary);
+
+  --font-outfit: 'Outfit', sans-serif;
+  --font-cinzel: 'Cinzel', serif;
+  --font-sans: var(--font-outfit);
+  --font-serif: var(--font-cinzel);
+
+  --animate-float: float 6s ease-in-out infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-  @apply bg-dark-950 text-white min-h-screen selection:bg-royal-gold selection:text-black;
+  background: var(--dark-950);
+  color: white;
+  min-height: 100vh;
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--royal-gold);
+  color: black;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif), serif;
+  font-weight: 400;
 }
 
 /* Luxury Utilities */
 .glass-panel {
-  @apply bg-dark-900/50 backdrop-blur-md border border-white/10;
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 .gold-gradient {
-  background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+  background: linear-gradient(135deg, #F4D03F 0%, #D4AF37 50%, #AA8C2C 100%);
 }
 
-.text-gold {
-  color: var(--royal-gold);
+.text-gold-gradient {
+  background: linear-gradient(135deg, #F4D03F 0%, #D4AF37 50%, #AA8C2C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.border-gold {
-  border-color: var(--royal-gold);
+.border-gold-glow {
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }

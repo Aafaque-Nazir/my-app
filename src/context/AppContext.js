@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 
 // --- defaults ---
 const defaultDrivers = [
@@ -23,24 +24,25 @@ const BookingContext = createContext();
 
 export function AppProvider({ children }) {
     // -- Auth State --
+    const { data: session, status } = useSession();
     const [user, setUser] = useState(null);
     const [authLoading, setAuthLoading] = useState(true);
 
     useEffect(() => {
-        const storedUser = localStorage.getItem("royal_user");
-        if (storedUser) setUser(JSON.parse(storedUser));
-        setAuthLoading(false);
-    }, []);
+        if (status === "loading") {
+            setAuthLoading(true);
+        } else {
+            setUser(session?.user || null);
+            setAuthLoading(false);
+        }
+    }, [session, status]);
 
-    const login = (email) => {
-        const user = { email, role: "admin" };
-        setUser(user);
-        localStorage.setItem("royal_user", JSON.stringify(user));
+    const login = () => {
+        // Deprecated: Login is handled by next-auth signIn in the component
     };
 
-    const logout = () => {
-        setUser(null);
-        localStorage.removeItem("royal_user");
+    const logout = async () => {
+        await signOut({ callbackUrl: "/admin" });
     };
 
     // -- Fleet State --

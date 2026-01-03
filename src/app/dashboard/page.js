@@ -21,6 +21,7 @@ export default function DashboardPage() {
     }, [user, authLoading, router]);
 
     const [isNewBookingOpen, setIsNewBookingOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [assignBookingId, setAssignBookingId] = useState(null);
     const [currentTime, setCurrentTime] = useState("");
 
@@ -51,21 +52,35 @@ export default function DashboardPage() {
         );
     }
 
+    // ... (existing code)
+
     return (
-        <div className="min-h-screen bg-dark-950 pl-64">
-            <Sidebar />
-            <main className="p-8">
-                <header className="mb-8 flex items-center justify-between">
+        <div className="min-h-screen bg-dark-950 md:pl-64 transition-all duration-300">
+            <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+            <main className="p-4 md:p-8">
+                {/* Mobile Header */}
+                <div className="md:hidden flex items-center justify-between mb-6">
+                    <h1 className="text-xl font-light text-white">ROYAL<span className="text-royal-gold">CAR</span></h1>
+                    <button
+                        onClick={() => setIsSidebarOpen(true)}
+                        className="p-2 text-white hover:bg-white/10 rounded-lg"
+                    >
+                        <LayoutDashboard className="w-6 h-6" />
+                    </button>
+                </div>
+
+                <header className="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
-                        <h1 className="text-2xl font-light text-white flex items-center gap-3">
-                            Console <span className="text-text-muted">Overview</span>
-                            {currentTime && <span className="text-xl font-mono text-royal-gold/60 border-l border-white/10 pl-3">{currentTime}</span>}
+                        <h1 className="text-3xl md:text-4xl font-serif text-white flex items-center gap-4">
+                            Console <span className="text-royal-gold/50 font-sans font-light">|</span> <span className="text-white/80">Overview</span>
+                            {currentTime && <span className="hidden md:inline text-lg font-mono text-royal-gold/60 border-l border-white/10 pl-4 tracking-widest">{currentTime}</span>}
                         </h1>
-                        <p className="text-text-muted text-sm mt-1">Today's Dispatch Activity</p>
+                        <p className="text-text-muted text-sm mt-2 uppercase tracking-widest pl-1">Today's Dispatch Activity</p>
                     </div>
                     <button
                         onClick={() => setIsNewBookingOpen(true)}
-                        className="flex items-center gap-2 bg-royal-gold text-dark-950 px-5 py-2.5 rounded-lg font-bold hover:bg-royal-gold-hover transition-colors shadow-lg shadow-royal-gold/20"
+                        className="w-full md:w-auto flex items-center justify-center gap-2 bg-royal-gold text-dark-950 px-5 py-2.5 rounded-lg font-bold hover:bg-royal-gold-hover transition-colors shadow-lg shadow-royal-gold/20"
                     >
                         <Plus className="w-4 h-4" />
                         New Booking
@@ -73,27 +88,38 @@ export default function DashboardPage() {
                 </header>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-3 gap-6 mb-10">
-                    <div className="glass-panel p-5 rounded-xl border-l-4 border-l-royal-gold">
-                        <div className="flex items-center justify-between mb-2">
-                            <p className="text-text-muted uppercase text-xs tracking-wider">Active Rides</p>
-                            <LayoutDashboard className="w-4 h-4 text-royal-gold" />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:-translate-y-1 transition-transform duration-500">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <LayoutDashboard className="w-24 h-24 text-royal-gold" />
                         </div>
-                        <p className="text-3xl font-bold text-white">{activeBookings}</p>
+                        <div className="relative z-10">
+                            <p className="text-royal-gold text-xs font-bold uppercase tracking-[0.2em] mb-2">Active Fleet</p>
+                            <p className="text-5xl font-serif text-white">{activeBookings}</p>
+                            <div className="w-12 h-0.5 bg-gradient-to-r from-royal-gold to-transparent mt-4" />
+                        </div>
                     </div>
-                    <div className="glass-panel p-5 rounded-xl border-l-4 border-l-yellow-500">
-                        <div className="flex items-center justify-between mb-2">
-                            <p className="text-text-muted uppercase text-xs tracking-wider">Pending Assignment</p>
-                            <Clock className="w-4 h-4 text-yellow-500" />
+
+                    <div className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:-translate-y-1 transition-transform duration-500">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <Clock className="w-24 h-24 text-royal-gold-light" />
                         </div>
-                        <p className="text-3xl font-bold text-white">{pendingCount}</p>
+                        <div className="relative z-10">
+                            <p className="text-royal-gold-light text-xs font-bold uppercase tracking-[0.2em] mb-2">Pending</p>
+                            <p className="text-5xl font-serif text-white">{pendingCount}</p>
+                            <div className="w-12 h-0.5 bg-gradient-to-r from-royal-gold-light to-transparent mt-4" />
+                        </div>
                     </div>
-                    <div className="glass-panel p-5 rounded-xl border-l-4 border-l-green-500">
-                        <div className="flex items-center justify-between mb-2">
-                            <p className="text-text-muted uppercase text-xs tracking-wider">Completed Today</p>
-                            <CheckCircle className="w-4 h-4 text-green-500" />
+
+                    <div className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:-translate-y-1 transition-transform duration-500">
+                        <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <CheckCircle className="w-24 h-24 text-green-500" />
                         </div>
-                        <p className="text-3xl font-bold text-white">{completedToday}</p>
+                        <div className="relative z-10">
+                            <p className="text-green-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Completed</p>
+                            <p className="text-5xl font-serif text-white">{completedToday}</p>
+                            <div className="w-12 h-0.5 bg-gradient-to-r from-green-500 to-transparent mt-4" />
+                        </div>
                     </div>
                 </div>
 
