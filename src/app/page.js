@@ -79,10 +79,11 @@ export default function LandingPage() {
     const workflowTl = gsap.timeline({
       scrollTrigger: {
         trigger: ".workflow-container",
-        start: "top top",
-        end: "+=2000", // Scroll distance to complete animation
+        start: "top top", // Pin it exactly at the top
+        end: "+=2000",
         scrub: 1,
         pin: true,
+        anticipatePin: 1,
       }
     });
 
@@ -248,12 +249,12 @@ export default function LandingPage() {
       </section>
 
       {/* NEW: Pinned Workflow Section */}
-      <section className="workflow-container relative h-screen flex items-center justify-center bg-dark-950 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 w-full h-full flex flex-col justify-center gap-16 md:gap-24 relative z-10">
+      <section className="workflow-container relative min-h-screen pt-48 pb-24 flex flex-col items-center justify-center bg-dark-950 overflow-hidden z-10">
+        <div className="max-w-7xl mx-auto px-6 w-full flex flex-col justify-center gap-16 relative z-10">
 
           {/* Centered Title */}
-          <div className="workflow-title text-center flex flex-col items-center">
-            <h2 className="font-serif text-4xl md:text-6xl lg:text-8xl font-medium mb-6 text-white tracking-wider leading-tight">
+          <div className="workflow-title text-center flex flex-col items-center mt-22">
+            <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl font-medium mb-6 text-white tracking-wider leading-tight">
               Seamless <span className="text-transparent bg-clip-text bg-gradient-to-r from-royal-gold via-yellow-200 to-royal-gold">Simplicity</span>
             </h2>
             <p className="text-text-muted max-w-2xl mx-auto text-base md:text-xl font-light tracking-wide">
@@ -262,29 +263,29 @@ export default function LandingPage() {
           </div>
 
           {/* Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 relative">
             {/* Step 1 */}
-            <div className="workflow-card-1 group p-8 md:p-10 bg-zinc-900/95 backdrop-blur-2xl border border-white/10 rounded-[2rem] hover:border-royal-gold/50 transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]">
-              <div className="w-16 h-16 rounded-full bg-royal-gold/10 flex items-center justify-center text-royal-gold mx-auto mb-8 text-2xl font-serif border border-royal-gold/20 group-hover:scale-110 transition-transform">1</div>
-              <h3 className="text-center text-xl font-serif text-white mb-4 tracking-wide">Request a Ride</h3>
+            <div className="workflow-card-1 group p-8 bg-zinc-900/95 backdrop-blur-2xl border border-white/10 rounded-[2rem] hover:border-royal-gold/50 transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]">
+              <div className="w-14 h-14 rounded-full bg-royal-gold/10 flex items-center justify-center text-royal-gold mx-auto mb-6 text-xl font-serif border border-royal-gold/20 group-hover:scale-110 transition-transform">1</div>
+              <h3 className="text-center text-lg font-serif text-white mb-3 tracking-wide">Request a Ride</h3>
               <p className="text-center text-text-muted text-sm leading-relaxed font-light">
                 Submit your itinerary details via our secure concierge form or dedicated dispatch line.
               </p>
             </div>
 
             {/* Step 2 */}
-            <div className="workflow-card-2 group p-8 md:p-10 bg-zinc-900/95 backdrop-blur-2xl border border-white/10 rounded-[2rem] hover:border-royal-gold/50 transition-all duration-500 shadow-2xl mt-0 md:mt-12 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]">
-              <div className="w-16 h-16 rounded-full bg-royal-gold/10 flex items-center justify-center text-royal-gold mx-auto mb-8 text-2xl font-serif border border-royal-gold/20 group-hover:scale-110 transition-transform">2</div>
-              <h3 className="text-center text-xl font-serif text-white mb-4 tracking-wide">Concierge Match</h3>
+            <div className="workflow-card-2 group p-8 bg-zinc-900/95 backdrop-blur-2xl border border-white/10 rounded-[2rem] hover:border-royal-gold/50 transition-all duration-500 shadow-2xl mt-0 md:mt-12 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]">
+              <div className="w-14 h-14 rounded-full bg-royal-gold/10 flex items-center justify-center text-royal-gold mx-auto mb-6 text-xl font-serif border border-royal-gold/20 group-hover:scale-110 transition-transform">2</div>
+              <h3 className="text-center text-lg font-serif text-white mb-3 tracking-wide">Concierge Match</h3>
               <p className="text-center text-text-muted text-sm leading-relaxed font-light">
                 Our team matches your request with the perfect vehicle and a vetted professional chauffeur.
               </p>
             </div>
 
             {/* Step 3 */}
-            <div className="workflow-card-3 group p-8 md:p-10 bg-zinc-900/95 backdrop-blur-2xl border border-white/10 rounded-[2rem] hover:border-royal-gold/50 transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]">
-              <div className="w-16 h-16 rounded-full bg-royal-gold/10 flex items-center justify-center text-royal-gold mx-auto mb-8 text-2xl font-serif border border-royal-gold/20 group-hover:scale-110 transition-transform">3</div>
-              <h3 className="text-center text-xl font-serif text-white mb-4 tracking-wide">Elite Arrival</h3>
+            <div className="workflow-card-3 group p-8 bg-zinc-900/95 backdrop-blur-2xl border border-white/10 rounded-[2rem] hover:border-royal-gold/50 transition-all duration-500 shadow-2xl hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]">
+              <div className="w-14 h-14 rounded-full bg-royal-gold/10 flex items-center justify-center text-royal-gold mx-auto mb-6 text-xl font-serif border border-royal-gold/20 group-hover:scale-110 transition-transform">3</div>
+              <h3 className="text-center text-lg font-serif text-white mb-3 tracking-wide">Elite Arrival</h3>
               <p className="text-center text-text-muted text-sm leading-relaxed font-light">
                 Receive chauffeur details 24 hours prior. Your driver arrives 15 minutes early, every time.
               </p>
@@ -298,7 +299,7 @@ export default function LandingPage() {
       </section>
 
       {/* NEW: True Parallax Banner */}
-      <section className="parallax-section relative h-[80vh] overflow-hidden flex items-center justify-center border-y border-white/10">
+      <section className="parallax-section relative h-[80vh] bg-dark-950 overflow-hidden flex items-center justify-center border-y border-white/10 z-20">
         {/* Parallax Background Image */}
         <div className="parallax-bg absolute inset-0 w-full h-[140%] -top-[20%] pointer-events-none">
           <Image
